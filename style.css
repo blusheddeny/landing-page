@@ -1,0 +1,65 @@
+body{
+font-family: 'Sora', sans-serif;
+margin:2em;
+line-height: 2em;
+background-image: url("pexels-dominika-roseclay-2679813.jpg");
+}
+button{
+background-color: transparent;
+border:white 2px solid;
+padding:1em;
+border-radius: 2em;
+}
+#profile{
+    width:200px;
+    height:200px;
+    object-fit:cover;
+    border-radius: 100%;
+
+}
+a{
+    text-decoration: none;
+    color:rgb(255, 255, 255);
+}
+button:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: 0.4s ease-in;
+}
+
+h1{
+    font-size: 4em;
+    text-align: center;
+    font-family: 'Updock', cursive;
+
+}
+.wrap{
+    margin:2em;
+    border-radius: 2em;
+    padding:2em;
+    backdrop-filter: blur(10px);
+}
+
+main{
+    padding: 2em;
+    text-align: center;
+}
+
+img{
+    width:100%;
+    border-radius: 2em;
+}
+.project{
+    background: linear-gradient(#ababab6a, #24242482);
+    border-radius: 1em;
+    padding:1em;
+    margin:2em;
+}
+.review{
+    background-color: #F2F2F2;
+    padding: 2em;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.348);
+}
+section{
+    padding:2em;
+    border-bottom:gray 2px solid;
+}
