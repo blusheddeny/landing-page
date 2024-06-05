@@ -1,65 +1,72 @@
-body{
-font-family: 'Sora', sans-serif;
-margin:2em;
-line-height: 2em;
-background-image: url("pexels-dominika-roseclay-2679813.jpg");
-}
-button{
-background-color: transparent;
-border:white 2px solid;
-padding:1em;
-border-radius: 2em;
-}
-#profile{
-    width:200px;
-    height:200px;
-    object-fit:cover;
-    border-radius: 100%;
 
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
 }
-a{
+
+header {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+h2 {
+    font-size: 1.5em;
+    color: #888;
+}
+
+main {
+    padding: 50px;
+}
+
+.services,
+.portfolio,
+.contact {
+    margin-bottom: 30px;
+}
+
+.services ul {
+    list-style: none;
+    padding: 0;
+}
+
+.services li {
+    margin-bottom: 10px;
+}
+
+.portfolio {
+    text-align: center;
+}
+
+.portfolio img {
+    width: 200px;
+    margin: 10px;
+}
+
+.contact {
+    text-align: center;
+}
+
+.contact a {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
     text-decoration: none;
-    color:rgb(255, 255, 255);
-}
-button:hover{
-    background-color: rgba(255, 255, 255, 0.3);
-    transition: 0.4s ease-in;
+    border-radius: 5px;
 }
 
-h1{
-    font-size: 4em;
+.contact a:hover {
+    background-color: #444;
+}
+
+footer {
+    background-color: #f1f1f1;
+    padding: 10px;
     text-align: center;
-    font-family: 'Updock', cursive;
-
-}
-.wrap{
-    margin:2em;
-    border-radius: 2em;
-    padding:2em;
-    backdrop-filter: blur(10px);
-}
-
-main{
-    padding: 2em;
-    text-align: center;
-}
-
-img{
-    width:100%;
-    border-radius: 2em;
-}
-.project{
-    background: linear-gradient(#ababab6a, #24242482);
-    border-radius: 1em;
-    padding:1em;
-    margin:2em;
-}
-.review{
-    background-color: #F2F2F2;
-    padding: 2em;
-    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.348);
-}
-section{
-    padding:2em;
-    border-bottom:gray 2px solid;
 }
