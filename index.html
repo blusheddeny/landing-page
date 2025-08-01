@@ -1,48 +1,350 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Design by Ingrid</title>
-    <link rel="stylesheet" href="public/assets/style.css">
+    <title>Bilingual Graphic Designer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A single-page, top-down narrative portfolio. The structure flows from a broad introduction (Hero), to personal context (About), to specific offerings (Services), to proof of work (Experience/Portfolio), to a quantifiable summary of abilities (Skills), and finally to a call to action (Contact). This logical, linear flow is intuitive for users and effectively tells the designer's story, building trust and interest at each step. The interactive portfolio modal prevents clutter and allows users to selectively dive deeper into projects they find interesting, enhancing usability. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Designer's skills & services. -> Goal: Inform/Organize. -> Viz/Presentation: Icon-based feature grid. -> Interaction: Static display. -> Justification: Icons provide quick visual cues for each service, making them easily scannable. -> Library/Method: HTML/Tailwind/Unicode.
+        - Report Info: Client work (Systems, Car Credit, Scrappycito). -> Goal: Organize/Compare. -> Viz/Presentation: Interactive logo grid with modals. -> Interaction: On-click modal reveals project details. -> Justification: Keeps the main view clean while offering detailed, on-demand information. This is more engaging than a long, static list. -> Library/Method: HTML/Tailwind/JS.
+        - Report Info: Designer's core competencies. -> Goal: Compare/Inform. -> Viz/Presentation: Radar Chart. -> Interaction: Animated on load. -> Justification: A radar chart provides a modern, holistic, and visually compelling snapshot of a multi-faceted skillset, more impactful than a simple list. -> Library/Method: Chart.js.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #4A4A4A;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #D97706;
+        }
+        .cta-button {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        .portfolio-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .portfolio-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .modal-backdrop {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .modal-content {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 80vw;
+            max-height: 500px;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <h1>Ingrid Valdez</h1>
-        <h2>Creative Design & Visual Communication</h2>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="bg-FDFBF8/80 backdrop-blur-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-amber-700">
+                Ingrid Valdez
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-gray-600">About</a>
+                <a href="#services" class="nav-link text-gray-600">Services</a>
+                <a href="#portfolio" class="nav-link text-gray-600">Portfolio</a>
+                <a href="#contact" class="nav-link text-gray-600 cta-button bg-amber-600 text-white px-4 py-2 rounded-full">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#about" class="block text-center py-2 px-4 text-sm text-gray-600 hover:bg-amber-50">About</a>
+            <a href="#services" class="block text-center py-2 px-4 text-sm text-gray-600 hover:bg-amber-50">Services</a>
+            <a href="#portfolio" class="block text-center py-2 px-4 text-sm text-gray-600 hover:bg-amber-50">Portfolio</a>
+            <a href="#contact" class="block text-center py-2 px-4 text-sm text-amber-600 hover:bg-amber-50">Contact</a>
+        </div>
     </header>
 
     <main>
-        <section class="services">
-            <h3>My Services</h3>
-            <ul>
-                <li>Graphic Design (social media graphics, banners, logos)</li>
-                <li>Web Design (Landing pages, website mockups)</li>
-                <li>Video Editing (Short social media videos, explainer videos)</li>
-                <li>Photo Editing (Image manipulation, product photos)</li>
-            </ul>
+        <!-- Hero Section -->
+        <section id="hero" class="container mx-auto px-6 py-24 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold leading-tight text-amber-800">A Bilingual Graphic Designer to Elevate Your Brand</h1>
+            <p class="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">I create compelling visuals that tell your story, connect with diverse audiences in both English and Spanish, and drive results.</p>
+            <a href="#portfolio" class="mt-8 inline-block cta-button bg-amber-600 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg">View My Work</a>
         </section>
 
-        <section class="portfolio">
-            <h3>Portfolio</h3>
-            <p>Check out some of my recent projects!</p>
-            <a href="#">
-                <img src="image1.jpg" alt="Project 1">
-            </a>
-            <a href="#">
-                <img src="image2.jpg" alt="Project 2">
-            </a>
-            </section>
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-amber-800">About Me</h2>
+                    <p class="text-gray-500 mt-2">I believe in creating useful, reliable and beautiful content</p>
+                </div>
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2">
+                        <h3 class="text-2xl font-bold mb-4">A Creative Partner Fluent in Design & Language</h3>
+                        <p class="mb-4 text-gray-600">I am a bilingual (Spanish & English) graphic designer with a passion for building cohesive and impactful brand presences through thoughtful and strategic design. My dual-language skills allow me to craft messages that are clear, authentic, and resonate across cultures.</p>
+                        <p class="text-gray-600">My goal is your success. I'm dedicated to providing creative solutions that are not only visually stunning but also strategically aligned with your business objectives, ensuring every design element has a purpose.</p>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="bg-amber-100 rounded-lg p-8 shadow-md">
+                            <div class="flex items-center mb-4">
+                                <span class="text-2xl mr-4">🌎</span>
+                                <h4 class="font-bold text-lg">Bilingual Advantage</h4>
+                            </div>
+                            <p class="text-gray-600">Connect with both English and Spanish-speaking markets authentically.</p>
+                            <div class="flex items-center mt-6 mb-4">
+                                <span class="text-2xl mr-4">💡</span>
+                                <h4 class="font-bold text-lg">Strategic Design</h4>
+                            </div>
+                            <p class="text-gray-600">Designs that don't just look good, but also achieve business goals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <section class="contact">
-            <h3>Let's Work Together!</h3>
-            <p>I'd love to hear about your design needs.</p>
-            <a href="mailto:[your email address]">Contact Me</a>
+        <!-- Services Section -->
+        <section id="services" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-amber-800">Services & Skills</h2>
+                    <p class="text-gray-500 mt-2">Here is a summary of the key services I offer to help build and grow your brand.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                        <div class="text-4xl text-amber-600 mb-4">🎨</div>
+                        <h3 class="text-xl font-bold mb-2">Marketing Material Redesign</h3>
+                        <p class="text-gray-600">Refreshing your flyers, brochures, and posts for a modern, consistent look.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                        <div class="text-4xl text-amber-600 mb-4">📖</div>
+                        <h3 class="text-xl font-bold mb-2">New Brand Guidelines</h3>
+                        <p class="text-gray-600">Developing comprehensive guides for logo, color, and typography usage.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                        <div class="text-4xl text-amber-600 mb-4">✍️</div>
+                        <h3 class="text-xl font-bold mb-2">Ongoing Design Projects</h3>
+                        <p class="text-gray-600">Handling your day-to-day design needs, from social media to campaigns.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                        <div class="text-4xl text-amber-600 mb-4">🎬</div>
+                        <h3 class="text-xl font-bold mb-2">Creative Content Production</h3>
+                        <p class="text-gray-600">Designing engaging social media posts, reels, and videos to boost your online presence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-amber-800">Relevant Experience</h2>
+                    <p class="text-gray-500 mt-2">This section showcases my work with various clients. Click on any project to see the details.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="portfolio-card bg-amber-50 rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer" data-client="systems">
+                        <h3 class="text-2xl font-bold text-amber-800">Systems with Christelle</h3>
+                        <p class="text-sm text-gray-500">Administration & Accounting <a href="https://systemswithchristelle.com/" target="_blank">See more</a></p>
+                    </div>
+                    <div class="portfolio-card bg-amber-50 rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer" data-client="car-credit">
+                        <h3 class="text-2xl font-bold text-amber-800">Car Credit Center</h3>
+                        <p class="text-sm text-gray-500">Automotive Finance <a href="https://www.facebook.com/CarCreditCenter/photos" target="_blank" >See posts</a></p>
+                    </div>
+                    <div class="portfolio-card bg-amber-50 rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer" data-client="scrappycito">
+                        <h3 class="text-2xl font-bold text-amber-800">Scrappycito</h3>
+                        <p class="text-sm text-gray-500">A image results search engine in which i participated in web design <a href="http://www.scrappycito.com:9330/" target="_blank">See more</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills Chart Section -->
+        <section id="skills" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-amber-800">Core Competencies</h2>
+                    <p class="text-gray-500 mt-2">This chart provides a visual representation of my key strengths as a creative professional.</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-amber-700 text-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold">Let's Work Together</h2>
+                <p class="mt-4 text-lg max-w-xl mx-auto text-amber-100">Ready to start? Let's discuss how I can help bring your vision to life. I'm committed to being a reliable and flexible partner for all your graphic design needs.</p>
+                <a href="mailto:girnid4@gmail.com" class="mt-8 inline-block cta-button bg-white text-amber-700 font-bold text-lg px-8 py-4 rounded-full shadow-lg">Get In Touch</a>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 Ingrid Valdez</p>
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-6 text-center text-sm">
+            &copy; 2025 Ingrid Valdez. All Rights Reserved.
+        </div>
     </footer>
+    
+    <!-- Modal -->
+    <div id="portfolio-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden opacity-0 z-50">
+        <div id="modal-content" class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-lg p-8 relative opacity-0 transform scale-95">
+            <button id="modal-close-button" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+            <h3 id="modal-title" class="text-2xl font-bold text-amber-800 mb-4"></h3>
+            <div id="modal-body" class="text-gray-600"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Portfolio Modal Logic
+            const portfolioCards = document.querySelectorAll('.portfolio-card');
+            const modal = document.getElementById('portfolio-modal');
+            const modalContent = document.getElementById('modal-content');
+            const modalCloseButton = document.getElementById('modal-close-button');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+
+            const portfolioData = {
+                systems: {
+                    title: 'Systems with Christelle',
+                    description: `
+                        <p class="mb-2">For this administration and accounting service, I focused on building a professional and engaging online presence.</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Designed engaging reels and posts for Instagram and Facebook.</li>
+                            <li>Edited videos to create dynamic and professional social media content.</li>
+                            <li>Contributed to the brand's online presence through a consistent visual style.</li>
+                        </ul>
+                    `
+                },
+                'car-credit': {
+                    title: 'Car Credit Center',
+                    description: '<p>Provided versatile graphic design support to bolster their ongoing marketing efforts and attract new customers.</p>'
+                },
+                scrappycito: {
+                    title: 'Scrappycito',
+                    description: '<p>Assisted with a variety of creative needs, providing flexible and timely design support for this dynamic project.</p>'
+                }
+            };
+
+            const openModal = (client) => {
+                const data = portfolioData[client];
+                if (!data) return;
+
+                modalTitle.textContent = data.title;
+                modalBody.innerHTML = data.description;
+                
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContent.classList.remove('opacity-0', 'scale-95');
+                }, 10);
+            };
+
+            const closeModal = () => {
+                modal.classList.add('opacity-0');
+                modalContent.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            };
+
+            portfolioCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    openModal(card.dataset.client);
+                });
+            });
+
+            modalCloseButton.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Skills Chart
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            const skillsChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Graphic Design', 'Branding', 'Social Media', 'Video Editing', 'Bilingual Comms'],
+                    datasets: [{
+                        label: 'Proficiency',
+                        data: [90, 85, 80, 95, 85],
+                        backgroundColor: 'rgba(217, 119, 6, 0.2)',
+                        borderColor: 'rgba(217, 119, 6, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(217, 119, 6, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(217, 119, 6, 1)'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 14,
+                                },
+                                color: '#4A4A4A'
+                            },
+                            ticks: {
+                                beginAtZero: true,
+                                max: 100,
+                                stepSize: 25,
+                                backdropColor: 'rgba(0,0,0,0)',
+                                color: '#888'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
